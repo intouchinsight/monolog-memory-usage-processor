@@ -2,12 +2,6 @@
 
 namespace LukeWaite\MonologMemoryUsageProcessor;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Ring\Core;
-use GuzzleHttp\Ring\Future\CompletedFutureArray;
-use GuzzleHttp\Ring\Future\FutureArrayInterface;
 use Monolog\Processor\MemoryProcessor;
 
 class MemoryUsageProcessor extends MemoryProcessor
