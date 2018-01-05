@@ -6,7 +6,7 @@ use LukeWaite\MonologMemoryUsageProcessor\MemoryUsageProcessor;
 use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
 
-class MemoryPeakUsageProcessorTest extends TestCase
+class MemoryUsageProcessorTest extends TestCase
 {
     /**
      * Care of the monolog TestCase class

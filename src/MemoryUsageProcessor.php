@@ -6,7 +6,6 @@ use Monolog\Processor\MemoryProcessor;
 
 class MemoryUsageProcessor extends MemoryProcessor
 {
-
     public function __construct($useFormatting = true)
     {
         parent::__construct(true, $useFormatting);
