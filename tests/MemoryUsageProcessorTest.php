@@ -47,12 +47,14 @@ class MemoryPeakUsageProcessorTest extends TestCase
         $this->assertWithoutFormatting($record, 'memory_peak_usage');
     }
 
-    protected function assertWithFormatting($record, $key) {
+    protected function assertWithFormatting($record, $key)
+    {
         $this->assertArrayHasKey($key, $record['extra']);
         $this->assertRegExp('#[0-9.]+ (M|K)?B$#', $record['extra'][$key]);
     }
 
-    protected function assertWithoutFormatting($record, $key) {
+    protected function assertWithoutFormatting($record, $key)
+    {
         $this->assertArrayHasKey($key, $record['extra']);
         $this->assertInternalType('int', $record['extra'][$key]);
         $this->assertGreaterThan(0, $record['extra'][$key]);
