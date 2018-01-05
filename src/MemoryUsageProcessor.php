@@ -18,7 +18,7 @@ class MemoryUsageProcessor extends MemoryProcessor
         parent::__construct(true, $useFormatting);
     }
 
-    public function __invoke(array $record): array
+    public function __invoke(array $record)
     {
         $usage = memory_get_usage(false);
         $usageReal = memory_get_usage(true);
