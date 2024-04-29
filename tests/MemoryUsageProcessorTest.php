@@ -3,39 +3,37 @@
 namespace Lukewaite\MonologMemoryUsageProcessor\Tests;
 
 use LukeWaite\MonologMemoryUsageProcessor\MemoryUsageProcessor;
+use Monolog\Level;
 use Monolog\Logger;
+use Monolog\LogRecord;
 use PHPUnit\Framework\TestCase;
 
 class MemoryUsageProcessorTest extends TestCase
 {
     /**
      * Care of the monolog TestCase class
-     *
-     * @return array Record
      */
-    protected function getRecord($level = Logger::WARNING, $message = 'test', $context = array())
+    protected function getRecord($level = Logger::WARNING, $message = 'test', $context = []): LogRecord
     {
-        return array(
-            'message' => $message,
-            'context' => $context,
-            'level' => $level,
-            'level_name' => Logger::getLevelName($level),
-            'channel' => 'test',
-            'datetime' => \DateTime::createFromFormat('U.u', sprintf('%.6F', microtime(true))),
-            'extra' => array(),
+        return new LogRecord(
+            message: $message,
+            context: $context,
+            level: Level::tryFrom($level),
+            channel: 'test',
+            datetime: new \DateTimeImmutable,
+            extra: [],
         );
     }
 
     public function testProcessor()
     {
-        $processor = new MemoryUsageProcessor();
+        $processor = new MemoryUsageProcessor;
         $record = $processor($this->getRecord());
         $this->assertWithFormatting($record, 'memory_usage');
         $this->assertWithFormatting($record, 'memory_usage_real');
         $this->assertWithFormatting($record, 'memory_peak_usage');
         $this->assertWithFormatting($record, 'memory_peak_usage');
     }
-
 
     public function testProcessorWithoutFormatting()
     {
@@ -50,13 +48,13 @@ class MemoryUsageProcessorTest extends TestCase
     protected function assertWithFormatting($record, $key)
     {
         $this->assertArrayHasKey($key, $record['extra']);
-        $this->assertRegExp('#[0-9.]+ (M|K)?B$#', $record['extra'][$key]);
+        $this->assertMatchesRegularExpression('#[0-9.]+ (M|K)?B$#', $record['extra'][$key]);
     }
 
     protected function assertWithoutFormatting($record, $key)
     {
         $this->assertArrayHasKey($key, $record['extra']);
-        $this->assertInternalType('int', $record['extra'][$key]);
+        $this->assertIsInt($record['extra'][$key]);
         $this->assertGreaterThan(0, $record['extra'][$key]);
     }
 }
