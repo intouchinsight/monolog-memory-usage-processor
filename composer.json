@@ -1,12 +1,12 @@
 {
     "name": "lukewaite/monolog-memory-usage-processor",
     "require": {
-        "php": "^8.0",
+        "php": "^8.3|^8.4",
         "monolog/monolog": "^3.0"
     },
     "require-dev": {
         "laravel/pint": "^1.15",
-        "phpunit/phpunit": "^10.0",
+        "phpunit/phpunit": "^10.0|^11.0",
         "squizlabs/php_codesniffer": "^2.8",
         "scrutinizer/ocular": "^1.9",
         "symfony/console": "^6.0"
