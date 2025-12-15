@@ -25,7 +25,7 @@ class MemoryUsageProcessorTest extends TestCase
         );
     }
 
-    public function testProcessor()
+    public function test_processor()
     {
         $processor = new MemoryUsageProcessor;
         $record = $processor($this->getRecord());
@@ -35,7 +35,7 @@ class MemoryUsageProcessorTest extends TestCase
         $this->assertWithFormatting($record, 'memory_peak_usage');
     }
 
-    public function testProcessorWithoutFormatting()
+    public function test_processor_without_formatting()
     {
         $processor = new MemoryUsageProcessor(false);
         $record = $processor($this->getRecord());
